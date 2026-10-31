@@ -6,7 +6,7 @@ In SpaceBourne 2's stations, markets and corridors, people stand in your way: yo
 shove them aside with your body. With Get Out of the Way, calm NPCs notice you walking at them,
 turn, take a short step out of your path, and step back to their spot once you have passed.
 
-Version 0.1.0 · UE4SS Lua mod · works alone or with the rest of the
+Version 0.1.0 · [Nexus Mods page](https://www.nexusmods.com/spacebourne2/mods/14) · UE4SS Lua mod · works alone or with the rest of the
 [realism set](#part-of-the-spacebourne-2-realism-set).
 
 ## What it does
@@ -111,7 +111,7 @@ To install them all at once, use the installer:
 | **Tactical Engineering** — realistic deployable turrets | released: [GitHub](https://github.com/hubertdungen/SpaceBourne2-TacticalEngineering) · [Nexus Mods](https://www.nexusmods.com/spacebourne2/mods/10) |
 | **Ammo Discipline** — realistic ammo limits and scavenging | released: [GitHub](https://github.com/hubertdungen/SpaceBourne2-AmmoDiscipline) · [Nexus Mods](https://www.nexusmods.com/spacebourne2/mods/12) |
 | **Ground Waypoints** — planet markers on foot and on the hoverbike | released: [GitHub](https://github.com/hubertdungen/SpaceBourne2-GroundWaypoints) · [Nexus Mods](https://www.nexusmods.com/spacebourne2/mods/13) |
-| **Get Out of the Way** — NPCs step aside naturally (this mod) | released: [GitHub](https://github.com/hubertdungen/SpaceBourne2-GetOutOfTheWay) |
+| **Get Out of the Way** — NPCs step aside naturally (this mod) | released: [GitHub](https://github.com/hubertdungen/SpaceBourne2-GetOutOfTheWay) · [Nexus Mods](https://www.nexusmods.com/spacebourne2/mods/14) |
 | Tactical First Person | coming |
 
 ## License
