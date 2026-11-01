@@ -95,8 +95,8 @@ Feel and limits: at most 4 NPCs move at once, at most 2 start per check, and one
 - **HTR**: HTR changes NPCs in combat only; this mod only moves calm ones. No shared hooks.
 - **Tactical Engineering, Faction Power, Ammo Discipline, Ground Waypoints, Gear Without Levels,
   Split Controls, SB2 HOTAS**: nothing in common (turrets are not characters).
-- No key by default. `ToggleKey` accepts only keys the set leaves free (Shift+F3 is the spare one
-  in the shared key plan).
+- No key by default. `ToggleKey` refuses the game's keys and the other set mods' keys (Shift+F3 is
+  HTR's slow perks since key plan revision 2c).
 
 ## 7. Test plan
 

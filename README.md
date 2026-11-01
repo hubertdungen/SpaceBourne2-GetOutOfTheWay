@@ -6,7 +6,7 @@ In SpaceBourne 2's stations, markets and corridors, people stand in your way: yo
 shove them aside with your body. With Get Out of the Way, calm NPCs notice you walking at them,
 turn, take a short step out of your path, and step back to their spot once you have passed.
 
-Version 0.1.0 · [Nexus Mods page](https://www.nexusmods.com/spacebourne2/mods/14) · UE4SS Lua mod · works alone or with the rest of the
+Version 0.1.1 · [Nexus Mods page](https://www.nexusmods.com/spacebourne2/mods/14) · UE4SS Lua mod · works alone or with the rest of the
 [realism set](#part-of-the-spacebourne-2-realism-set).
 
 ## What it does
@@ -38,7 +38,7 @@ Version 0.1.0 · [Nexus Mods page](https://www.nexusmods.com/spacebourne2/mods/1
 
 ## Install
 
-1. Download `GetOutOfTheWay-0.1.0.zip` from the
+1. Download `GetOutOfTheWay-0.1.1.zip` from the
    [releases](https://github.com/hubertdungen/SpaceBourne2-GetOutOfTheWay/releases).
 2. Extract it into the game folder (`...\steamapps\common\SpaceBourne 2\`). It adds
    `SB2\Binaries\Win64\Mods\GetOutOfTheWay\`; the `enabled.txt` inside turns it on.
@@ -61,8 +61,9 @@ Edit `Mods\GetOutOfTheWay\scripts\config.lua`, then restart the game. Every line
 - `ReturnToSpot`: step back to the old spot once you have passed (`true`).
 - `Cooldown` (3 s): before the same NPC steps aside again.
 - Who: `Civilians`, `Guards`, `Allies`, `Squad`, `Talkers` (`true` / `false`).
-- `ToggleKey`: none by default. Set one, e.g. `"Shift+F3"` (the realism set's spare key), to switch
-  the mod on and off in game. The game's own keys and the other set mods' keys are refused.
+- `ToggleKey`: none by default. Set one to switch the mod on and off in game. The set's mods already
+  use every laptop key, so pick one your own setup leaves free; the game's own keys and the other set
+  mods' keys are refused.
 
 ## How it works
 

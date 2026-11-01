@@ -16,7 +16,7 @@
     * only for an NPC in your way: a few property reads, up to two navigation queries, one move.
 ]]
 
-local VERSION = "0.1.0"
+local VERSION = "0.1.1"
 
 -- Game names (the only things to fix after a game patch) -------------------------------------
 local G = {
@@ -678,13 +678,14 @@ end)
 
 -- Optional toggle key (none by default) --------------------------------------------------------
 -- Realism set key plan: the game's keys are refused with or without Shift, and so are the keys the
--- other set mods use. Shift+F3 is the set's spare key. UE4SS matches modifiers exactly.
+-- other set mods use (Shift+F3 is HTR's slow perks). UE4SS matches modifiers exactly.
 local GAME_KEYS = { F1 = 1, F2 = 1, F5 = 1, F6 = 1, F8 = 1, F10 = 1, F12 = 1 }
 local PLAIN_TAKEN = {
     F3 = "Silent Ops", F4 = "Silent Ops", F7 = "HTR", F9 = "HTR", F11 = "HTR", DEL = "Tactical Engineering",
     ZERO = "Ground Waypoints", I = "the game's cargo key", P = "a second Escape key in the game",
 }
 local SHIFT_TAKEN = {
+    F3 = "HTR (slow perks)",
     F4 = "Silent Ops", F7 = "HTR", F9 = "Faction Power", F11 = "Tactical First Person",
     DEL = "Gear Without Levels", ZERO = "Ammo Discipline",
 }

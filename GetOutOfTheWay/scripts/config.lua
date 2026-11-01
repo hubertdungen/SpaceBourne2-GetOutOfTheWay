@@ -13,10 +13,10 @@ return {
     StartOn = true,
 
     -- Key to switch the mod on / off. None by default ("").
-    -- Example: "Shift+F3" (the spare key of the realism set's shared key plan).
+    -- The realism set uses every laptop key already, so pick a key your own setup leaves free.
     -- Refused: the game's own keys F1, F2, F5, F6, F8, F10, F12 (with or without Shift), Ctrl and
     -- Alt (map and crouch on foot), plain I (cargo) and P (a second Escape), and the keys of the
-    -- other set mods (F3, F4, F7, F9, F11, Delete, 0, and Shift with F4, F7, F9, F11, Delete, 0).
+    -- other set mods (F3, F4, F7, F9, F11, Delete, 0, and Shift with F3, F4, F7, F9, F11, Delete, 0).
     ToggleKey = "",
 
     -- Distances, in metres.

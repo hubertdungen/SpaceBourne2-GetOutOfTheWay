@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 — 2026-11-01
+
+- `ToggleKey` refuses Shift+F3 (HTR's slow perks since the set's key plan revision 2c); the docs no
+  longer suggest it as a free key. No change in game otherwise.
+
 ## 0.1.0 — 2026-10-31
 
 First release.
