@@ -6,7 +6,7 @@ In SpaceBourne 2's stations, markets and corridors, people stand in your way: yo
 shove them aside with your body. With Get Out of the Way, calm NPCs notice you walking at them,
 turn, take a short step out of your path, and step back to their spot once you have passed.
 
-Version 0.1.1 · [Nexus Mods page](https://www.nexusmods.com/spacebourne2/mods/14) · UE4SS Lua mod · works alone or with the rest of the
+Version 0.1.2 · [Nexus Mods page](https://www.nexusmods.com/spacebourne2/mods/14) · UE4SS Lua mod · works alone or with the rest of the
 [realism set](#part-of-the-spacebourne-2-realism-set).
 
 ## What it does
@@ -38,7 +38,7 @@ Version 0.1.1 · [Nexus Mods page](https://www.nexusmods.com/spacebourne2/mods/1
 
 ## Install
 
-1. Download `GetOutOfTheWay-0.1.1.zip` from the
+1. Download `GetOutOfTheWay-0.1.2.zip` from the
    [releases](https://github.com/hubertdungen/SpaceBourne2-GetOutOfTheWay/releases).
 2. Extract it into the game folder (`...\steamapps\common\SpaceBourne 2\`). It adds
    `SB2\Binaries\Win64\Mods\GetOutOfTheWay\`; the `enabled.txt` inside turns it on.
@@ -82,6 +82,9 @@ Split Controls and Gear Without Levels installed:
 - NPCs in a fight and crouched NPCs never move; nothing happens while Silent Ops reports Yellow;
 - frame times with the mod on vs off: no difference (95 vs 95 fps, same median and p99);
 - your saves untouched.
+0.1.2 (NPCs learnt from their families' ReceiveBeginPlay on the game thread instead of
+NotifyOnNewObject) was smoke-tested on 2026-11-06 with the whole set: no crash, the four squad
+soldiers tracked.
 <!-- /nexus:skip -->
 
 Known limits:

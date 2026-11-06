@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.2 — 2026-11-06
+
+- **Fix: a possible crash while a level loads.** The mod learnt each new NPC through a UE4SS
+  feature that runs on the game's loading thread, and that could crash the game ("Fatal Error!")
+  during a level load. NPCs now report themselves when they appear in the world, on the game's own
+  thread.
+- Tested in game with the whole realism set: no crash; your squad was tracked as before.
+
 ## 0.1.1 — 2026-11-01
 
 - `ToggleKey` refuses Shift+F3 (HTR's slow perks since the set's key plan revision 2c); the docs no

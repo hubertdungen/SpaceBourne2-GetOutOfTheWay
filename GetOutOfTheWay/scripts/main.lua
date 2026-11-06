@@ -9,14 +9,14 @@
   the game's walk animation, turns the game's way and stays on the navigation mesh.
 
   Cost rules:
-    * NPCs are learnt when the game creates them (NotifyOnNewObject on Character: the callback only
-      queues the object). No FindAllOf anywhere, no per-frame hook.
+    * NPCs are learnt when they begin play (hooks on their families' ReceiveBeginPlay, on the
+      game thread). No FindAllOf anywhere, no per-frame hook.
     * 5 times a second: the player, and the NPCs already within 8 m (one position read each), plus a
       slice of the other tracked NPCs (each re-read once a second).
     * only for an NPC in your way: a few property reads, up to two navigation queries, one move.
 ]]
 
-local VERSION = "0.1.1"
+local VERSION = "0.1.2"
 
 -- Game names (the only things to fix after a game patch) -------------------------------------
 local G = {
@@ -512,7 +512,11 @@ local function tick(now)
     if #S.pending > 0 then
         local q = S.pending
         S.pending = {}
-        for _, o in ipairs(q) do adopt(o, now) end
+        local seen = {} -- a child's BeginPlay and its parent's both report it
+        for _, o in ipairs(q) do
+            local a = addr(o)
+            if a and not seen[a] then seen[a] = true; adopt(o, now) end
+        end
     end
     if not S.on then -- switched off: only keep learning new NPCs
         if S.active > 0 then for _, e in ipairs(S.list) do if e.state then finish(e, now) end end end
@@ -663,15 +667,41 @@ local function guardedTick()
     end
 end
 
-local okN, errN = pcall(NotifyOnNewObject, G.Character, function(obj)
-    S.pending[#S.pending + 1] = obj -- only queue: the object is still being constructed
-end)
-if not okN then
-    warn("could not watch new characters (" .. tostring(errN) .. "); the mod does nothing")
-    return
+-- NPCs report themselves when they begin play: hooks on their families' ReceiveBeginPlay, on the
+-- game thread (0.1.2). 0.1.1 used NotifyOnNewObject on Character, whose callback UE4SS runs on
+-- whatever thread creates the object (the loading thread during a level load), which could crash
+-- inside UE4SS (2026-11-06). A class is hooked once it is loaded; a lookup miss costs ~37 ms, so
+-- misses back off up to a minute.
+local BEGIN = {
+    "/Game/Locomotion/Blueprints/CharacterLogic/ALS_Base.ALS_Base_C:ReceiveBeginPlay",
+    "/Game/1Data/11_AI/Q1_Shooter_AI.Q1_Shooter_AI_C:ReceiveBeginPlay",
+    "/Game/1Data/11_AI/BattleAI/Master_Soldier.Master_Soldier_C:ReceiveBeginPlay",
+    "/Game/Locomotion/Blueprints/CharacterLogic/Master_NPC.Master_NPC_C:ReceiveBeginPlay",
+}
+local hooked, hookAt, hookWait = {}, 0, 1
+local function onBegin(self)
+    local o = self:get()
+    if o ~= nil then S.pending[#S.pending + 1] = o end
+end
+local function hookFamilies(now)
+    if now < hookAt then return end
+    local missing = 0
+    for _, fn in ipairs(BEGIN) do
+        if not hooked[fn] then
+            local cls = StaticFindObject((fn:gsub(":ReceiveBeginPlay$", "")))
+            if valid(cls) and pcall(RegisterHook, fn, onBegin) then
+                hooked[fn] = true
+                log("watching " .. fn:match("%.([%w_]+):"))
+            else
+                missing = missing + 1
+            end
+        end
+    end
+    if missing == 0 then hookAt = math.huge else hookAt = now + hookWait; hookWait = math.min(hookWait * 2, 60) end
 end
 
 LoopAsync(math.floor(T.tick * 1000), function()
+    ExecuteInGameThread(function() pcall(hookFamilies, os.clock()) end)
     ExecuteInGameThread(guardedTick)
     return false
 end)
