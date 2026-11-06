@@ -16,7 +16,7 @@
     * only for an NPC in your way: a few property reads, up to two navigation queries, one move.
 ]]
 
-local VERSION = "0.1.2"
+local VERSION = "0.1.3"
 
 -- Game names (the only things to fix after a game patch) -------------------------------------
 local G = {
@@ -700,10 +700,18 @@ local function hookFamilies(now)
     if missing == 0 then hookAt = math.huge else hookAt = now + hookWait; hookWait = math.min(hookWait * 2, 60) end
 end
 
-LoopAsync(math.floor(T.tick * 1000), function()
-    ExecuteInGameThread(function() pcall(hookFamilies, os.clock()) end)
-    ExecuteInGameThread(guardedTick)
-    return false
+-- The check runs on the game thread, pumped by the ALS character tick (gametick.lua, 0.1.3). Until
+-- 0.1.2 it was LoopAsync + ExecuteInGameThread: called from UE4SS's async thread,
+-- ExecuteInGameThread writes a map all mods share without a lock, and two mods doing it at once
+-- crashed the game (UE4SS.dll+0x87c104). After each load or possession (ClientRestart) the pump
+-- hook is set again and the families are looked for at once, before the NPCs begin play.
+local GT = require("gametick")
+GT.log = function(msg) warn(msg) end
+GT.drive(GT.FOOT_TICK, "foot")
+GT.boot(function(now) pcall(hookFamilies, now) end)
+GT.every(T.tick, function(now)
+    pcall(hookFamilies, now)
+    guardedTick()
 end)
 
 -- Optional toggle key (none by default) --------------------------------------------------------

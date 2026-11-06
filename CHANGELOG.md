@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.3 — 2026-11-06
+
+- **Fix: a "Fatal Error!" crash that could come at any moment.** The mod's check, five times a
+  second, ran on a UE4SS background thread. When two mods of the set did that at the same moment,
+  UE4SS's own bookkeeping broke and the game crashed. It now runs on the game's own thread, driven
+  by the game's tick (the same fix in every mod of the realism set).
+- Not tested in game yet.
+
 ## 0.1.2 — 2026-11-06
 
 - **Fix: a possible crash while a level loads.** The mod learnt each new NPC through a UE4SS
